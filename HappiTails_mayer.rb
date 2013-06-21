@@ -1,3 +1,63 @@
+# DATA SCHEMA
+
+class Animal
+    attr_accessor :name, :breed, :age, :gender, :favorite_toys, :has_owner, :location
+    def initialize(name, breed, age, gender, favorite_toys, has_owner, location)
+      @names = name
+      @age = breed
+      @gender = gender
+      @favorite_toys = favorite_toys
+      @has_owner = has_owner
+      @location = location
+    end
+
+    def is_avaiable?
+      @has_owner.any? #
+    end
+
+end
+
+class Client
+  attr_accessor :name, :age, :gender, :kids, :pets
+  def initialize(name, age, gender, kids)
+    @name = name
+    @age = age
+    @gender = gender
+    @kids = kids
+    @pets = []
+  end
+
+  def number_pets
+    @pets.count
+  end
+
+  def to_s
+    return "#{@name} is a #{@age} year old #{@gender} with #{@kids} and #{pets}."
+  end
+
+end
+
+# LOADS SEED DATA
+
+roster = {}
+
+roster[:clients] = []
+roster[:animals] = []
+
+roster[:clients] << Client.new("Jim", 27, "Male", 5)
+roster[:clients] << Client.new("Sarah", 47, "Female", 1)
+roster[:clients] << Client.new("Jill", 57, "Female", 0)
+roster[:clients] << Client.new("Tom", 37, "Male", 2)
+roster[:clients] << Client.new("ABANDONED", 00, "Unknown", 0)
+
+roster[:animals] << Animal.new("Spot", "Dog", 4, "Male", "Chew Toy", false, "HappiTails")
+roster[:animals] << Animal.new("Garfield", "Cat", 6, "Male", "Toy A", true, "HappiTails")
+roster[:animals] << Animal.new("Snoopy", "Dog", 8, "Male", "Toy B", false, "Home")
+roster[:animals] << Animal.new("Alf", "Alien", 22, "Male", "Toy D", true, "Home")
+roster[:animals] << Animal.new("Hobbes", "Tiger", 7, "Male", "Slinky", false, "HappiTails")
+
+# APPLICATION FUNCTIONALITY
+
 puts "Welcome to the HappiTails Animal Log — or HAL :)"
 
 puts "To begin, please type 1 for Client Menu or 2 for Manager Menu"
@@ -16,19 +76,45 @@ if menu_selection == 1
 
   if client_menu_selection == 1
 
-    puts "a list of animals flagged as available to adopt"
+    puts roster.animal[:animals].each {|animal| "#{@name} is a #{@type} year old #{@age} with #{@gender} and #{favorite_toys}"} #only put animals flagged as available for adoption
+
+    #puts roster.animal[:animals].each {|animal| "#{@name} is a #{@type} year old #{@age} with #{@gender} and #{favorite_toys}"} #only put animals flagged as available for adoption
 
   elsif client_menu_selection == 2
 
-    puts "push give your animal up for adoption"
+    new_animal = {}
+
+    puts "What is the name of your animal?"
+
+    new_animal_name = gets.chomp
+
+    puts "What type of animal are you putting up for adoption?"
+
+    new_animal_type = gets.chomp
+
+    puts "What is the name of your animal?"
+
+    new_animal_age = gets.chomp
+
+    puts "What is the gender of your animal?"
+
+    new_animal_gender = gets.chomp
+
+    puts "What is your animal's favorite toy?"
+
+    new_animal_favorite_toy = gets.chomp
+
+    push "Do you want HappiTails to host your animal during adoption?"
+
+    new_animal_name = gets.chomp
 
   elsif client_menu_selection == 3
 
-    puts "List of animals currently at the shelter"
+    puts roster[:animals] #only put animals housed in the shelter
 
   elsif client_menu_selection == 4
 
-    puts "a list of all clients"
+    puts roster[:clients]
 
   end
 
